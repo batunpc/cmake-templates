@@ -4,7 +4,7 @@
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 #include <cxxopts.hpp>
-
+#include <catch2/catch_config.hpp>
 #include "config.hpp"
 #include "my_lib.h"
 

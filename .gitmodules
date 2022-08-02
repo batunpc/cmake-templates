@@ -1,3 +1,6 @@
 [submodule "2_CMake/HelloWorld/external/json"]
 	path = 2_CMake/HelloWorld/external/json
 	url = https://github.com/nlohmann/json
+[submodule "2_CMake/HelloWorld/external/catch2"]
+	path = 2_CMake/HelloWorld/external/catch2
+	url = https://github.com/catchorg/Catch2

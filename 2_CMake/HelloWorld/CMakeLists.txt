@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+option(ENABLE_TESTING "Unit testing build" ON)
+
 set(LIBRARY_NAME "Library")
 set(EXECUTABLE_NAME "Executable")
 
@@ -13,6 +15,7 @@ include(AddGitSubmodule)
 include(FetchContent)
 
 add_git_submodule("external/json")
+add_git_submodule("external/catch2")
 
 FetchContent_Declare(
   fmt
@@ -35,3 +38,4 @@ add_subdirectory(config)
 add_subdirectory(external)
 add_subdirectory(src)
 add_subdirectory(app)
+add_subdirectory(tests)
