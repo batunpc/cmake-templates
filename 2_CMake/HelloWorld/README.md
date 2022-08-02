@@ -39,3 +39,49 @@ target_link_libraries(Executable PUBLIC Library)
 ```
 
 ❗ In the root ```CMakeLists.txt``` file,  make sure the libraries added as subdirectory beforehand the app directory.
+
+<hr>
+
+## Using GitSubmodules for CMake external libraries
+- 1)  Use this below command conventiant to add external libraries to your project as submodule. The below library is just an example for the demonstration. </br></br>
+  
+
+  ```git
+  git submodule add https://github.com/nlohmann/json external/json
+  ```
+- 2)  Then create cmake folder in your project. ``mkdir cmake`` (we will add cmake functions)
+- 3)  Then create ``AddGitSubmodule.cmake`` file in the cmake folder.
+- 4)  Then add the following code to the ``AddGitSubmodule.cmake`` file:
+
+```cmake
+function(add_git_submodule dirname)
+  find_package(Git REQUIRED)
+
+  if(NOT EXISTS ${dirname}/CMakeLists.txt)
+    execute_process(COMMAND ${GIT_EXECUTABLE}
+      submodule update --init --recursive -- ${dirname}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    )
+  endif()
+
+  add_subdirectory(${dirname})
+endfunction()
+
+```
+- 5) In the main ```CMakeLists.txt``` file, add the following code to finally call the function we have writting abobe:
+
+
+```cmake
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+include(AddGitSubmodule) #includes CMake module files
+add_git_submodule("external/json") #function call
+```
+
+- 6) We can link this external library we finally have added with our executable. Navigate to your app ```CMakeLists.txt``` file and add the following code:
+
+```cmake
+target_link_libraries(${EXECUTABLE_NAME} PUBLIC
+  ${LIBRARY_NAME}
+  nlohmann_json #Linked library name 
+)
+```
