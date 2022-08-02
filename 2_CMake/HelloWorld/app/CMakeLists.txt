@@ -4,4 +4,5 @@ target_link_libraries(${EXECUTABLE_NAME} PUBLIC
   nlohmann_json
   fmt::fmt
   spdlog::spdlog_header_only
+  ${CONAN_CXXOPTS}
 )

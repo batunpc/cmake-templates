@@ -26,6 +26,11 @@ FetchContent_Declare(
   GIT_TAG v1.10.0
 )
 FetchContent_MakeAvailable(spdlog)
+
+set(CONAN_DISABLE_CHECK_COMPILER TRUE) # Detected a mismatch for the compiler version between your conan profile
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 add_subdirectory(config)
 add_subdirectory(external)
 add_subdirectory(src)

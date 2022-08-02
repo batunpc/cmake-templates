@@ -1,0 +1,8 @@
+[requires]
+cxxopts/3.0.0
+
+[options]
+
+
+[generators]
+cmake
