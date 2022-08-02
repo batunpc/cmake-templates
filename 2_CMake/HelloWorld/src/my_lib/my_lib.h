@@ -8,5 +8,6 @@ class MyClass {
   void printHelloWorld();
 };
 } // namespace my_lib
+unsigned int Factorial(unsigned int number);
 
 #endif // MY_LIB_H_
