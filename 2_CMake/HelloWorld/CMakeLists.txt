@@ -8,9 +8,25 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(LIBRARY_NAME "Library")
 set(EXECUTABLE_NAME "Executable")
 
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+include(AddGitSubmodule)
+include(FetchContent)
+
+add_git_submodule("external/json")
+
+FetchContent_Declare(
+  fmt
+  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+  GIT_TAG 9.0.0
+)
+FetchContent_MakeAvailable(fmt)
+FetchContent_Declare(
+  spdlog
+  GIT_REPOSITORY https://github.com/gabime/spdlog.git
+  GIT_TAG v1.10.0
+)
+FetchContent_MakeAvailable(spdlog)
 add_subdirectory(config)
+add_subdirectory(external)
 add_subdirectory(src)
 add_subdirectory(app)
-
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
